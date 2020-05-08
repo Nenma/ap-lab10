@@ -3,11 +3,19 @@
 ## Overview
 At the moment, the projects contains:
 - **ServerApplication project - Lab10Server**:
-  - The GameServer class that is an enum acting as a singleton for accessing an instance of the server socket
-  - The GameThread class which creates a separate thread for each client in order to treat all of them concurrently. It contains an infinite loop in order to "handle" each client command, up until the *exit* or *stop* command
+  - The Game, Board and Player classes
+  - A modified GameServer class that waits for 2 Clients before creating a separate ClientThread which takes a Game instance as a parameter; the Game instance is created using a Board instance and 2 Player instances which take, mainly, a socket and the other Player as a parameter
+  - A modified ClientThread class that now creates 2 new threads for each Player of the Game instance, since Player implements Runnable
 - **ClientApplication project - Lab10Client**:
-  - The GameClient class which waits for client input and sends it through a socket to the server to be handlet in its own thread
-  - Sending the *exit* or *stop* command will terminate the client app and close its socket
+  - Modified the while loop so now it only takes position commands to be sent to the server
+  - Added a Board class similar to the server-side one in order to capture tha board status at each turn on the Client side (not used yet)
+
+## Optional
+The tasks are:
+- Implement functionalities of the game, using the classes *Game*, *Board*, *Player*, etc.
+- The clients will send to the server commands such as: *create game*, *join game*, *submit move*, etc.
+- The server is responsible with the game management and mediating the players.
+- Once a game is finished, an HTML or [SGF](https://en.wikipedia.org/wiki/Smart_Game_Format) representation of the game should be uploaded to a Web server. You may use [JCraft](http://www.jcraft.com/jsch/) for connecting to a server using SFTP and transferring a file (or a similar solution). 
 
 ## Compulsory
 The tasks are:
